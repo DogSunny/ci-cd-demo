@@ -19,9 +19,6 @@ public class HomeController {
     @Value("${version}")
     private String version;
 
-    @Value("${git.branch}")
-    private String gitBranch;
-
     @GetMapping("/")
     public String home(Model model) throws IOException {
         byte[] bytes = Files.readAllBytes(Paths.get(new ClassPathResource("git.properties").getURI()));
