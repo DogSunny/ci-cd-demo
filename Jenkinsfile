@@ -47,7 +47,7 @@ pipeline {
                                                         patternSeparator: '[, ]+',
                                                         remoteDirectory: '/',
                                                         remoteDirectorySDF: false,
-                                                        removePrefix: '/',
+                                                        removePrefix: '/jenkins',
                                                         sourceFiles: 'app.jar,app.sh')
                                         ],
                                         usePromotionTimestamp: false,
