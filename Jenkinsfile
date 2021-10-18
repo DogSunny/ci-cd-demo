@@ -13,17 +13,49 @@ pipeline {
                 sh 'mvn --version'
             }
         }
+        stage('build') {
+            steps {
+                sh 'mvn clean package -DskipTests'
+                sh 'pwd'
+                echo 'build success'
+            }
+        }
         stage('RELEASE') {
             steps {
-                sh 'mvn package -DskipTests'
-                sh 'pwd'
-                echo 'package success'
+                echo 'releces success'
             }
         }
         stage('DEPLOY') {
             steps {
-                sh 'mvn --version'
+                sh 'mv target *.jar application.jar'
+                sshPublisher(
+                        failOnError: true,
+                        publishers: [
+                                sshPublisherDesc(
+                                        configName: 'vmcent7-slave',
+                                        transfers: [
+                                                sshTransfer(
+                                                        cleanRemote: false,
+                                                        excludes: '',
+                                                        execCommand: 'java -jar application.jar',
+                                                        execTimeout: 120000,
+                                                        flatten: false,
+                                                        makeEmptyDirs: false,
+                                                        noDefaultExcludes: false,
+                                                        patternSeparator: '[, ]+',
+                                                        remoteDirectory: '/home/devin/jenkins/',
+                                                        remoteDirectorySDF: false,
+                                                        removePrefix: '',
+                                                        sourceFiles: 'application.jar')
+                                        ],
+                                        usePromotionTimestamp: false,
+                                        useWorkspaceInPromotion: false,
+                                        verbose: false
+                                )
+                        ]
+                )
             }
+
         }
         stage('printenv') {
             steps {
