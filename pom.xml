@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.devin</groupId>
     <artifactId>ci-cd-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
     <name>ci-cd-demo</name>
     <description>ci-cd-demo</description>
 
