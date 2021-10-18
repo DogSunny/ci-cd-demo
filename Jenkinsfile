@@ -27,7 +27,7 @@ pipeline {
         }
         stage('DEPLOY') {
             steps {
-                sh 'mv target/*.jar application.jar'
+                sh 'mv target/*.jar app.jar'
                 sh 'mv target/classes/scripts/app.sh app.sh'
                 sh 'chmod +x app.sh'
                 sshPublisher(
@@ -39,7 +39,7 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: './app.sh',
+                                                        execCommand: 'sh app.sh',
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
@@ -48,7 +48,7 @@ pipeline {
                                                         remoteDirectory: '/',
                                                         remoteDirectorySDF: false,
                                                         removePrefix: '',
-                                                        sourceFiles: 'application.jar,app.sh')
+                                                        sourceFiles: 'app.jar,app.sh')
                                         ],
                                         usePromotionTimestamp: false,
                                         useWorkspaceInPromotion: false,
