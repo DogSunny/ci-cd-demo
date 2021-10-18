@@ -39,7 +39,7 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: 'sh /jenkins/app.sh',
+                                                        execCommand: 'cd /home/devin/jenkins;sh app.sh',
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
