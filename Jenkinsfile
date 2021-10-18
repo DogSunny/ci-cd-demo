@@ -14,6 +14,7 @@ pipeline {
     stages {
         stage('print info') {
             steps {
+                echo "${params.BRANCH_TAG}"
             }
         }
         stage('checkout') {
