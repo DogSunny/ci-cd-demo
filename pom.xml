@@ -15,8 +15,8 @@
     <description>ci-cd-demo</description>
 
     <scm>
-        <connection>scm:git:ssh://@github.com:DogSunny/ci-cd-demo.git</connection>
-        <developerConnection>scm:git:ssh://@github.com:DogSunny/ci-cd-demo.git</developerConnection>
+        <connection>scm:git:ssh://git@github.com:DogSunny/ci-cd-demo.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com:DogSunny/ci-cd-demo.git</developerConnection>
         <url>https://github.com/DogSunny/ci-cd-demo.git</url>
         <tag>HEAD</tag>
     </scm>
