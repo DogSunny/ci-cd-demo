@@ -39,7 +39,7 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: 'touch a.txt',
+                                                        execCommand: 'sh /jenkins/app.sh',
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
@@ -47,7 +47,7 @@ pipeline {
                                                         patternSeparator: '[, ]+',
                                                         remoteDirectory: '/',
                                                         remoteDirectorySDF: false,
-                                                        removePrefix: '/jenkins',
+                                                        removePrefix: '',
                                                         sourceFiles: 'app.jar,app.sh')
                                         ],
                                         usePromotionTimestamp: false,
