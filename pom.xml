@@ -13,6 +13,14 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>ci-cd-demo</name>
     <description>ci-cd-demo</description>
+
+    <scm>
+        <connection>scm:git@github.com:DogSunny/ci-cd-demo.git</connection>
+        <developerConnection>scm:git@github.com:DogSunny/ci-cd-demo.git</developerConnection>
+        <url>https://github.com/DogSunny/ci-cd-demo.git</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>
