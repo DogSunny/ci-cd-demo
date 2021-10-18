@@ -29,6 +29,7 @@ pipeline {
             steps {
                 sh 'mv target/*.jar application.jar'
                 sh 'mv target/classes/scripts/app.sh app.sh'
+                sh 'chmod +x app.sh'
                 sshPublisher(
                         failOnError: true,
                         publishers: [
@@ -38,13 +39,13 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: 'java -jar application.jar',
+                                                        execCommand: './app.sh',
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
                                                         noDefaultExcludes: false,
                                                         patternSeparator: '[, ]+',
-                                                        remoteDirectory: '/home/devin/jenkins/',
+                                                        remoteDirectory: '/',
                                                         remoteDirectorySDF: false,
                                                         removePrefix: '',
                                                         sourceFiles: 'application.jar,app.sh')
