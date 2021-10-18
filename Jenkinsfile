@@ -39,7 +39,7 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: 'sh app.sh',
+                                                        execCommand: 'pwd',
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
