@@ -16,7 +16,7 @@ pipeline {
         stage('RELEASE') {
             steps {
                 sh 'mvn package -DskipTests'
-                sh 'll ./'
+                sh 'pwd'
                 echo 'package success'
             }
         }
