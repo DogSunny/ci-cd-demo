@@ -15,8 +15,8 @@
     <description>ci-cd-demo</description>
 
     <scm>
-        <connection>scm:git:ssh://git@github.com:DogSunny/ci-cd-demo.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com:DogSunny/ci-cd-demo.git</developerConnection>
+        <connection>scm:git:https://github.com/DogSunny/ci-cd-demo.git</connection>
+        <developerConnection>scm:git:https://github.com/DogSunny/ci-cd-demo.git</developerConnection>
         <url>https://github.com/DogSunny/ci-cd-demo.git</url>
         <tag>HEAD</tag>
     </scm>
@@ -57,7 +57,7 @@
                 <artifactId>maven-release-plugin</artifactId>
                 <version>2.5.3</version>
                 <configuration>
-                    <tagBase>ssh://git@github.com:DogSunny/ci-cd-demo.git/tags</tagBase>
+                    <tagBase>https://github.com/DogSunny/ci-cd-demo.git/tags</tagBase>
                     <!--是否自动为子模块分配父版本。如果设置为false，将提示用户输入每个子模块的版本。-->
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <!--tag标签名-->
