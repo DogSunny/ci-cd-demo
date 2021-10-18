@@ -39,7 +39,7 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: 'pwd',
+                                                        execCommand: 'touch a.txt',
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
