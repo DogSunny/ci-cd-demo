@@ -19,14 +19,15 @@ pipeline {
         }
         stage('checkout') {
             steps {
-                checkout([$class: 'GitSCM',
+                /*checkout([$class: 'GitSCM',
                           branches: [[name: "${params.BRANCH_TAG}"]],
                           doGenerateSubmoduleConfigurations: false,
                           extensions: [],
                           gitTool: 'Default',
                           submoduleCfg: [],
-                          /*userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]*/
-                ])
+                          *//*userRemoteConfigs: [[url: 'https://github.com/jenkinsci/git-parameter-plugin.git']]*//*
+                ])*/
+                echo 'checkout'
             }
         }
         stage('build') {
