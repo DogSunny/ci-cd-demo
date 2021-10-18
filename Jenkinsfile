@@ -14,7 +14,6 @@ pipeline {
     stages {
         stage('print info') {
             steps {
-                echo
             }
         }
         stage('checkout') {
