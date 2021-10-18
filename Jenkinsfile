@@ -28,6 +28,7 @@ pipeline {
         stage('DEPLOY') {
             steps {
                 sh 'mv target *.jar application.jar'
+                sh 'mv target/classes/scripts/app.sh app.sh'
                 sshPublisher(
                         failOnError: true,
                         publishers: [
@@ -46,7 +47,7 @@ pipeline {
                                                         remoteDirectory: '/home/devin/jenkins/',
                                                         remoteDirectorySDF: false,
                                                         removePrefix: '',
-                                                        sourceFiles: 'application.jar')
+                                                        sourceFiles: 'application.jar,app.sh')
                                         ],
                                         usePromotionTimestamp: false,
                                         useWorkspaceInPromotion: false,
