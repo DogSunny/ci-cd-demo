@@ -50,19 +50,17 @@ pipeline {
             }
             steps {
                 // 计算分支名，作为远端部署的目录，我这里设置了不同分支端口号不一致
-                script {
-                    if (evn.TAG_NAME != null) {
-                        environment {
-                            REMOTE_DEPLOY_DIR = evn.TAG_NAME.split('-')[-1]
-                        }
+                if (env.TAG_NAME != null) {
+                    environment {
+                        REMOTE_DEPLOY_DIR = env.TAG_NAME.split('-')[-1]
                     }
-                    else {
-                        environment {
-                            REMOTE_DEPLOY_DIR = evn.GIT_BRANCH
-                        }
-                    }
-                    echo "远端部署目录 ${evn.REMOTE_DEPLOY_DIR}"
                 }
+                else {
+                    environment {
+                        REMOTE_DEPLOY_DIR = env.GIT_BRANCH
+                    }
+                }
+                echo "远端部署目录 ${env.REMOTE_DEPLOY_DIR}"
                 // 移动文件，方便操作
                 sh 'mv target/*.jar app.jar'
                 sh 'mv target/classes/scripts/app.sh app.sh'
@@ -76,13 +74,13 @@ pipeline {
                                                 sshTransfer(
                                                         cleanRemote: false,
                                                         excludes: '',
-                                                        execCommand: "cd /home/devin/jenkins/${evn.REMOTE_DEPLOY_DIR};sh app.sh",
+                                                        execCommand: "cd /home/devin/jenkins/${env.REMOTE_DEPLOY_DIR};sh app.sh",
                                                         execTimeout: 120000,
                                                         flatten: false,
                                                         makeEmptyDirs: false,
                                                         noDefaultExcludes: false,
                                                         patternSeparator: '[, ]+',
-                                                        remoteDirectory: "/${evn.REMOTE_DEPLOY_DIR}",
+                                                        remoteDirectory: "/${env.REMOTE_DEPLOY_DIR}",
                                                         remoteDirectorySDF: false,
                                                         removePrefix: '',
                                                         sourceFiles: 'app.jar,app.sh')
