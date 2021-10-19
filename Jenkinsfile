@@ -37,7 +37,7 @@ pipeline {
             }
         }
 
-        stage('Maven Package') {
+        stage('Maven 打包') {
             // 声明执行条件
             when {
                 environment(name: 'DEPLOY', value: 'true')
@@ -49,7 +49,7 @@ pipeline {
             }
         }
 
-        stage('DEPLOY') {
+        stage('部署到服务器') {
             // 声明执行条件
             when {
                 environment(name: 'DEPLOY', value: 'true')
