@@ -48,6 +48,7 @@ pipeline {
                 echo " ${env.DEPLOY}"
                 echo "${env.RELEASED}"
                 echo "${env.DEPLOY && !env.RELEASED}"
+                echo "${env.DEPLOY && env.RELEASED == 'false'}"
             }
         }
         stage('Maven 打包') {
