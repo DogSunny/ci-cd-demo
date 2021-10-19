@@ -58,7 +58,7 @@ pipeline {
                     }
                     else {
                         environment {
-                            REMOTE_DEPLOY_DIR = env.GIT_BRANCH
+                            REMOTE_DEPLOY_DIR = "${env.GIT_BRANCH}"
                         }
                     }
                 }
