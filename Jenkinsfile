@@ -12,6 +12,9 @@ pipeline {
         // 输出带时间戳
         timestamps()
     }
+    environment {
+        RELEASED = false
+    }
     parameters {
         // 脚本需要的参数
         booleanParam(name: 'RELEASE', defaultValue: false, description: '发布到私服')
@@ -29,6 +32,9 @@ pipeline {
                     environment(name: 'RELEASE', value: 'true')
                 }
             }
+            environment {
+                RELEASED = true
+            }
             steps {
                 sh 'chmod +x *.sh'
                 sh './prepare.sh'
@@ -40,7 +46,10 @@ pipeline {
         stage('Maven 打包') {
             // 声明执行条件
             when {
-                environment(name: 'DEPLOY', value: 'true')
+                expression {
+                    // 需要部署，且没发布（发布会自动打包的）
+                    return env.DEPLOY && !env.RELEASED
+                }
             }
             steps {
                 sh 'mvn clean package -DskipTests'
