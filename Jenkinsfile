@@ -32,10 +32,11 @@ pipeline {
                     environment(name: 'RELEASE', value: 'true')
                 }
             }
-            environment {
-                RELEASED = true
-            }
+
             steps {
+                withEnv(["RELEASED=true"]) {
+                    echo "RELEASED = ${env.RELEASED}"
+                }
                 sh 'chmod +x *.sh'
                 sh './prepare.sh'
                 sh './perform.sh'
