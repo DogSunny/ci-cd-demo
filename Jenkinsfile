@@ -49,6 +49,7 @@ pipeline {
                 echo "${env.RELEASED}"
                 echo "${env.DEPLOY && !env.RELEASED}"
                 echo "${env.DEPLOY && env.RELEASED == 'false'}"
+                echo "${env.DEPLOY == 'true' && env.RELEASED == 'false'}"
             }
         }
         stage('Maven 打包') {
@@ -56,7 +57,7 @@ pipeline {
             when {
                 expression {
                     // 需要部署，且没发布（发布会自动打包的）
-                    return env.DEPLOY && !env.RELEASED
+                    return env.DEPLOY == 'true' && env.RELEASED == 'false'
                 }
             }
             steps {
