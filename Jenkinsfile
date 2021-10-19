@@ -33,7 +33,7 @@ pipeline {
             when {
                 allOf {
                     not { buildingTag() }
-                    environment(name: 'RELEASE', value: true)
+                    environment(name: 'RELEASE', value: 'true')
                 }
             }
             steps {
@@ -46,7 +46,7 @@ pipeline {
         stage('DEPLOY') {
             // 声明执行条件
             when {
-                environment(name: 'DEPLOY', value: true)
+                environment(name: 'DEPLOY', value: 'true')
             }
             steps {
                 // 计算分支名，作为远端部署的目录，我这里设置了不同分支端口号不一致
