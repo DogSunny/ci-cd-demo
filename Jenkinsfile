@@ -58,14 +58,10 @@ pipeline {
                 // 计算分支名，作为远端部署的目录，我这里设置了不同分支端口号不一致
                 script {
                     if (env.TAG_NAME != null) {
-                        environment {
-                            REMOTE_DEPLOY_DIR = env.TAG_NAME.split('-')[-1]
-                        }
-                    }
-                    else {
-                        environment {
-                            REMOTE_DEPLOY_DIR = "${env.BRANCH_NAME}"
-                        }
+                        echo "TAG_NAME ${env.TAG_NAME}"
+                        env.REMOTE_DEPLOY_DIR = env.TAG_NAME.split('-')[-1]
+                    } else {
+                        env.REMOTE_DEPLOY_DIR = env.BRANCH_NAME
                     }
                 }
                 echo "远端部署目录 ${env.REMOTE_DEPLOY_DIR}"
