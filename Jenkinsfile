@@ -42,7 +42,13 @@ pipeline {
                 echo 'release success'
             }
         }
-
+        stage('test') {
+            stages {
+                echo " ${env.DEPLOY}"
+                echo "${env.RELEASED}"
+                echo "${env.DEPLOY && !env.RELEASED}"
+            }
+        }
         stage('Maven 打包') {
             // 声明执行条件
             when {
@@ -110,15 +116,11 @@ pipeline {
             }
 
         }
-        stage('printenv') {
-            steps {
-                sh 'printenv'
-            }
-        }
+
     }
     post {
         always {
-            echo 'always run'
+            sh 'printenv'
         }
 
     }
