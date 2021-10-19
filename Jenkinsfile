@@ -37,9 +37,8 @@ pipeline {
                 withEnv(["RELEASED=true"]) {
                     echo "RELEASED = ${env.RELEASED}"
                 }
-                sh 'chmod +x *.sh'
-                sh './prepare.sh'
-                sh './perform.sh'
+                sh 'sh prepare.sh'
+                sh 'sh perform.sh'
                 echo 'release success'
             }
         }
