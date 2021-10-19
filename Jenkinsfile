@@ -43,7 +43,7 @@ pipeline {
             }
         }
         stage('test') {
-            stages {
+            steps {
                 echo " ${env.DEPLOY}"
                 echo "${env.RELEASED}"
                 echo "${env.DEPLOY && !env.RELEASED}"
