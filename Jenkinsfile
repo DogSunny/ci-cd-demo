@@ -22,13 +22,6 @@ pipeline {
         maven 'default'
     }
     stages {
-        stage('Maven Package') {
-            steps {
-                sh 'mvn clean package -DskipTests'
-                sh 'pwd'
-                echo 'build success'
-            }
-        }
         stage('发布到私服') {
             when {
                 allOf {
@@ -43,6 +36,19 @@ pipeline {
                 echo 'release success'
             }
         }
+
+        stage('Maven Package') {
+            // 声明执行条件
+            when {
+                environment(name: 'DEPLOY', value: 'true')
+            }
+            steps {
+                sh 'mvn clean package -DskipTests'
+                sh 'pwd'
+                echo 'build success'
+            }
+        }
+
         stage('DEPLOY') {
             // 声明执行条件
             when {
@@ -58,11 +64,14 @@ pipeline {
                     }
                     else {
                         environment {
-                            REMOTE_DEPLOY_DIR = "${env.GIT_BRANCH}"
+                            REMOTE_DEPLOY_DIR = "${env.BRANCH_NAME}"
                         }
                     }
                 }
                 echo "远端部署目录 ${env.REMOTE_DEPLOY_DIR}"
+                echo "GIT_BRANCH ${env.GIT_BRANCH}"
+                echo "JOB_BASE_NAME ${env.JOB_BASE_NAME}"
+                echo "BRANCH_NAME ${env.BRANCH_NAME}"
                 // 移动文件，方便操作
                 sh 'mv target/*.jar app.jar'
                 sh 'mv target/classes/scripts/app.sh app.sh'
