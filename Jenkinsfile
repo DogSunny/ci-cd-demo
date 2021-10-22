@@ -34,8 +34,8 @@ pipeline {
             }
 
             steps {
-                withEnv(["RELEASED=true"]) {
-                    echo "RELEASED = ${env.RELEASED}"
+                script {
+                    env.RELEASED == 'true'
                 }
                 sh 'sh prepare.sh'
                 sh 'sh perform.sh'
