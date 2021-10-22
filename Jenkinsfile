@@ -54,7 +54,7 @@ pipeline {
             when {
                 expression {
                     // 需要部署，且没发布（发布会自动打包的）
-                    return env.DEPLOY == 'true' && env.RELEASED == 'false'
+                    return env.DEPLOY == 'true' && env.RELEASED == null
                 }
             }
             steps {
