@@ -12,9 +12,6 @@ pipeline {
         // 输出带时间戳
         timestamps()
     }
-    environment {
-        RELEASED = false
-    }
     parameters {
         // 脚本需要的参数
         booleanParam(name: 'RELEASE', defaultValue: false, description: '发布到私服')
@@ -77,8 +74,8 @@ pipeline {
                     if (env.TAG_NAME != null) {
                         echo "TAG_NAME ${env.TAG_NAME}"
                         env.REMOTE_DEPLOY_DIR = env.TAG_NAME.split('-')[-1]
-                        if (evn.REMOTE_DEPLOY_DIR == env.TAG_NAME) {
-                            evn.REMOTE_DEPLOY_DIR = 'master'
+                        if (env.REMOTE_DEPLOY_DIR == env.TAG_NAME) {
+                            env.REMOTE_DEPLOY_DIR = 'master'
                         }
                     } else {
                         env.REMOTE_DEPLOY_DIR = env.BRANCH_NAME
