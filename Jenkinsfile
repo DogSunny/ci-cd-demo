@@ -12,9 +12,6 @@ pipeline {
         // 输出带时间戳
         timestamps()
     }
-    environment {
-        RELEASED = false
-    }
     parameters {
         // 脚本需要的参数
         booleanParam(name: 'RELEASE', defaultValue: false, description: '发布到私服')
@@ -34,9 +31,10 @@ pipeline {
             }
 
             steps {
-                withEnv(["RELEASED=true"]) {
-                    echo "RELEASED = ${env.RELEASED}"
+                script {
+                    env.RELEASED = 'true'
                 }
+                echo "RELEASED $env.RELEASED"
                 sh 'sh prepare.sh'
                 sh 'sh perform.sh'
                 echo 'release success'
@@ -44,11 +42,11 @@ pipeline {
         }
         stage('test') {
             steps {
-                echo " ${env.DEPLOY}"
-                echo "${env.RELEASED}"
-                echo "${env.DEPLOY && !env.RELEASED}"
-                echo "${env.DEPLOY && env.RELEASED == 'false'}"
-                echo "${env.DEPLOY == 'true' && env.RELEASED == 'false'}"
+                echo "DEPLOY ${env.DEPLOY}"
+                echo "RELEASED ${env.RELEASED}"
+                echo "&&! ${env.DEPLOY && !env.RELEASED}"
+                echo "&&=F ${env.DEPLOY && env.RELEASED == 'false'}"
+                echo "==T&&==F${env.DEPLOY == 'true' && env.RELEASED == 'false'}"
             }
         }
         stage('Maven 打包') {
@@ -56,7 +54,7 @@ pipeline {
             when {
                 expression {
                     // 需要部署，且没发布（发布会自动打包的）
-                    return env.DEPLOY == 'true' && env.RELEASED == 'false'
+                    return env.DEPLOY == 'true' && env.RELEASED == null
                 }
             }
             steps {
@@ -77,8 +75,8 @@ pipeline {
                     if (env.TAG_NAME != null) {
                         echo "TAG_NAME ${env.TAG_NAME}"
                         env.REMOTE_DEPLOY_DIR = env.TAG_NAME.split('-')[-1]
-                        if (evn.REMOTE_DEPLOY_DIR == env.TAG_NAME) {
-                            evn.REMOTE_DEPLOY_DIR = 'master'
+                        if (env.REMOTE_DEPLOY_DIR == env.TAG_NAME) {
+                            env.REMOTE_DEPLOY_DIR = 'master'
                         }
                     } else {
                         env.REMOTE_DEPLOY_DIR = env.BRANCH_NAME
