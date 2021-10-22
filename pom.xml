@@ -9,7 +9,7 @@
     </parent>
     <groupId>com.devin</groupId>
     <artifactId>ci-cd-demo</artifactId>
-    <version>3.0.0-zxzq</version>
+    <version>3.0.1-zxzq-SNAPSHOT</version>
     <name>ci-cd-demo</name>
     <description>ci-cd-demo</description>
 
@@ -17,7 +17,7 @@
         <connection>scm:git:git@github.com:DogSunny/ci-cd-demo.git</connection>
         <developerConnection>scm:git:git@github.com:DogSunny/ci-cd-demo.git</developerConnection>
         <url>https://github.com/DogSunny/ci-cd-demo.git</url>
-        <tag>v3.0.0-zxzq</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
