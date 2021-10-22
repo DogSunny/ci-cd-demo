@@ -35,7 +35,7 @@ pipeline {
 
             steps {
                 script {
-                    env.RELEASED == 'true'
+                    env.RELEASED = 'true'
                 }
                 sh 'sh prepare.sh'
                 sh 'sh perform.sh'
