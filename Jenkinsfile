@@ -34,6 +34,7 @@ pipeline {
                 script {
                     env.RELEASED = 'true'
                 }
+                echo "RELEASED $env.RELEASED"
                 sh 'sh prepare.sh'
                 sh 'sh perform.sh'
                 echo 'release success'
@@ -41,11 +42,11 @@ pipeline {
         }
         stage('test') {
             steps {
-                echo " ${env.DEPLOY}"
-                echo "${env.RELEASED}"
-                echo "${env.DEPLOY && !env.RELEASED}"
-                echo "${env.DEPLOY && env.RELEASED == 'false'}"
-                echo "${env.DEPLOY == 'true' && env.RELEASED == 'false'}"
+                echo "DEPLOY ${env.DEPLOY}"
+                echo "RELEASED ${env.RELEASED}"
+                echo "&&! ${env.DEPLOY && !env.RELEASED}"
+                echo "&&=F ${env.DEPLOY && env.RELEASED == 'false'}"
+                echo "==T&&==F${env.DEPLOY == 'true' && env.RELEASED == 'false'}"
             }
         }
         stage('Maven 打包') {
