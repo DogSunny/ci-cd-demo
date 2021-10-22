@@ -77,6 +77,9 @@ pipeline {
                     if (env.TAG_NAME != null) {
                         echo "TAG_NAME ${env.TAG_NAME}"
                         env.REMOTE_DEPLOY_DIR = env.TAG_NAME.split('-')[-1]
+                        if (evn.REMOTE_DEPLOY_DIR == env.TAG_NAME) {
+                            evn.REMOTE_DEPLOY_DIR = 'master'
+                        }
                     } else {
                         env.REMOTE_DEPLOY_DIR = env.BRANCH_NAME
                     }
